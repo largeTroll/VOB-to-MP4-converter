@@ -49,8 +49,8 @@ do
 	echo "Converting folder: ${i}"
 	cd $i
 
-	# Do a quick check, weather there has already been a conversion in the past
-	if [ -z $(find . -name "*.mp4") ]
+	# Do a quick check, weather there has already been a conversion in the past (look if there is already a .mp4 file)
+	if [ -z $(find .. -name "*.mp4") ]
 	then
 		# Give me the file which contains the main movie
 		moviefilename=`find . -size +1000M -name "*1.VOB"`
