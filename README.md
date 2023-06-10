@@ -27,7 +27,7 @@ And you need ffmpeg installed (you probably already have) and have a little know
 ## Using it
 To run this script, you need to specify the following parameters:  
 `[CONVERSION_DIRECTORY]`: This is the path to the folder with the movies  
-`[ENCODER]`: This is the encoder for later .mp4 file. The suggestions are libx264 or libx265, but you can use any other encoder, that produces a .mp4 file.
+`[ENCODER]`: This is the encoder for the later .mp4 file. The suggestions are libx264 or libx265, but you can use any other encoder, that produces a .mp4 file.
 You can run `ffmpeg -codecs` to show all the availiable codecs. Mostly you will just need libx264 and libx265.
   
 Example:  
@@ -65,8 +65,8 @@ Videos
   
 ### IMPORTANT
 The bash file only checks if there are arguments specified, NOT IF THEY ARE CORRECT! If you specify a wrong path, the script will fail with an error message from bash.  
-Also note, that I have implemented a short check, if the film has already been converted, but I wouldn't rely on it tooooo much on it. I'm pretty sure, that there are cases, in which this check will fail, so USE WITH CAUTION.  
-It might also be a good idea, to save the raw movie somewhere as a backup, in case something goes wrong. I CAN'T GUARANTEE YOU, THAT THIS WILL WORK WITHOUT ANY DATA LOSS, SO USE AT OWN RISK!  
+Also note, that I have implemented a short check, if the film has already been converted, but I wouldn't rely on it tooooo much. I'm pretty sure, that there are cases, in which this check will fail and the existing .mp4 file will be overridden.  
+It might also be a good idea, to save the raw movie somewhere as a backup, in case something goes wrong. I can't promise to you, that this script will work.  
 
 ## Making changes
 Feel free to make any changes to this script to make it suit your needs. I have included more comments than needed to ensure you understand the script more easily.
