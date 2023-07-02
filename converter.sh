@@ -76,20 +76,27 @@ do
 
 
 		# Get the Outputfilename:
+  		# e.g. /home/$USER/Videos/My Movie/VIDEO_TS
 		cwd=`pwd`
+  		# e.g. /home/$USER/Videos/My Movie
 		path=${cwd%%/VIDEO_TS}
 		# Nice feature, if you want to know, how the movie is actually called
+  		# e.g. My Movie
 		moviename=${path##*/}
 		echo "The output film will be called: ${cwd}/${moviename}.mp4"
 		#echo $moviename
 
 		echo "Starting to convert movie! $(date +"%X")"
 		# Concat the movie with ffmpeg
-		$(ffmpeg -i "concat:${concatlist%%|}" -loglevel warning -vcodec ${2} -crf 18 -tune film -acodec libmp3lame -scodec copy -map 0:a -map 0:v -map 0:s? ${path}/${moviename}.mp4)
+  		# This is the heart of the script
+    		# Further options: You can use -loglevel warning/quiet to minimize the output (there is no progressbar available then)
+      		# Use -crf value to set the quality-size-ratio
+		# Or any other option. For further information, https://trac.ffmpeg.org/wiki/Encode/H.264 might be helpful.
+		$(ffmpeg -i "concat:${concatlist%%|}" -vcodec ${2} -crf 23 -acodec libmp3lame -scodec copy -map 0:a -map 0:v -map 0:s? ${path}/${moviename}.mp4)
 		echo -e "Finished converting movie! $(date +"%X")\n"
 
 
-		# Clean the screen
+		# Clear the screen
 		#clear
 		# Increase the counter for the number of comverted films
 		(( numfilms++ ))
