@@ -62,7 +62,7 @@ do
 		# Make a list of every file in the main movie
 		conversionlist=`for movie in $(ls ${basename}*.VOB);
 		do
-			# The VTS_[TRACKNUMBER]_0.VOB file is the dvd menu
+			# The VTS_[TRACKNUMBER]_0.VOB file is the dvd menu so you can discard it
 			if [ $movie != "${basename}0.VOB" ];
 			then
 				echo -n "${movie}|";
@@ -92,13 +92,14 @@ do
     		# Further options: You can use -loglevel warning/quiet to minimize the output (there is no progressbar available then)
       		# Use -crf value to set the quality-size-ratio
 		# Or any other option. For further information, https://trac.ffmpeg.org/wiki/Encode/H.264 might be helpful.
-		$(ffmpeg -i "concat:${concatlist%%|}" -vcodec ${2} -crf 23 -acodec libmp3lame -scodec copy -map 0:a -map 0:v -map 0:s? ${path}/${moviename}.mp4)
+  		# The -probesize and -analyzeduration option should detect streams that begin later in the movie like subtitles
+		$(ffmpeg -probesize 300M -analyzeduration 400M -i "concat:${concatlist%%|}" -dn -vcodec ${2} -crf 23 -acodec libmp3lame -scodec copy -map 0 "${path}/${moviename}.mp4")
 		echo -e "Finished converting movie! $(date +"%X")\n"
 
 
 		# Clear the screen
 		#clear
-		# Increase the counter for the number of comverted films
+		# Increase the counter for the number of converted movies
 		(( numfilms++ ))
 	else
 		echo -e "This film has already been converted: ${i}\n"
